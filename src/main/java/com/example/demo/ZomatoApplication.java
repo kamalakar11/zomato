@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication(scanBasePackages = "com.example")
-@EnableJpaRepositories(basePackages = "com.example.delegate")
+@EnableJpaRepositories(basePackages = "com.example.dao")
 @EntityScan(basePackages = "com.example.pojo")
 public class ZomatoApplication {
 

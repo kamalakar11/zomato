@@ -11,6 +11,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.dao.FoodOrderDao;
 import com.example.pojo.Food;
 
 @Service
@@ -18,9 +19,6 @@ public class FoodOrderDelegate {
 
 	@Autowired
 	private FoodOrderDao dao;
-	
-	@Autowired
-	private EntityManagerFactory entityManagerFactory;
 	
 	public void placeOrder(Food food) {
 		System.out.println("placeOrder :: FoodOrderDelegate");
@@ -45,13 +43,8 @@ public class FoodOrderDelegate {
 	}
 
 	public List<Food> getFoodList(String itemType) {
-		
-		SessionFactory sf = entityManagerFactory.unwrap(SessionFactory.class);
-		Session session = sf.openSession();
-		Query q = session.createQuery("from Food where type=:itemType");
-		q.setParameter("itemType", itemType);
-		System.out.println("query preparation done!!");
-		List<Food> list = q.list();
-		return list;
+		System.out.println("getFoodList :: FoodOrderDelegate");
+		List<Food> foodList = dao.findByType(itemType);
+		return foodList;
 	}
 }
